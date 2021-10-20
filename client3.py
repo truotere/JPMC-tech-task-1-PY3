@@ -35,7 +35,7 @@ def getDataPoint(quote):
 	stock = quote['stock']
 	bid_price = float(quote['top_bid']['price'])
 	ask_price = float(quote['top_ask']['price'])
-	price = (bid_price+ask_price)/2
+	price = (bid_price + ask_price)/2
 	return stock, bid_price, ask_price, price
 
 def getRatio(price_a, price_b):
@@ -43,6 +43,7 @@ def getRatio(price_a, price_b):
 	""" ------------- Update this function ------------- """
 	""" Also create some unit tests for this function in client_test.py """
 	if (price_b == 0):
+		# when price_b is 0 avoid throwing ZeroDivisionError
 		return
 	return price_a/price_b
 
@@ -50,7 +51,7 @@ def getRatio(price_a, price_b):
 if __name__ == "__main__":
 
 	# Query the price once every N seconds.
-	for _ in iter(range(N)):
+	for _ in range(N):
 		quotes = json.loads(urllib.request.urlopen(QUERY.format(random.random())).read())
 
 		""" ----------- Update to get the ratio --------------- """
